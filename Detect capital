@@ -1,0 +1,38 @@
+class Solution {
+    public boolean detectCapitalUse(String word) {
+        boolean a=true,b=true,c=true;
+        //all capitals
+        for(int i=0;i<word.length();i++){
+        if(!Character.isUpperCase(word.charAt(i))){
+            a= false;
+            break;
+        }
+        }
+        if(a){return true;}
+        //all small
+         for(int i=0;i<word.length();i++){
+        if(!Character.isLowerCase(word.charAt(i))){
+            b= false;
+            break;
+        }
+        }
+        if(b){return true;}
+        //first letter is capital
+
+        if(!Character.isUpperCase(word.charAt(0))){
+            return false;
+        }
+        if(c){
+        for(int i=1;i<word.length();i++){
+        if(!Character.isLowerCase(word.charAt(i))){
+            c= false;
+            break;
+        }
+        }
+        }
+        if(c){return true;}   
+        
+        //if not matching
+        return false;
+    }
+}
