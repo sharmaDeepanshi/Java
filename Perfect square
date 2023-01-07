@@ -1,0 +1,9 @@
+class Solution {
+    public boolean isPerfectSquare(int num) {
+         float a = (float)Math.pow(num,0.5);    //num=16,a=4          
+        if(a%1 == 0){                           //4%1=0
+            return true;
+        }
+        return false;
+    }
+}
