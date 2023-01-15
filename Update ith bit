@@ -1,0 +1,16 @@
+import java.util.Scanner;
+//update ith bit
+public class bit_operations {
+    public static void set_ithBit(int n,int i){
+        int bitmask=1<<i;
+        System.out.println(n | bitmask);
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter your number:");
+        int num = sc.nextInt();
+        System.out.println("Enter ith bit:");
+        int i = sc.nextInt();
+        set_ithBit(num,i);
+    }
+}
