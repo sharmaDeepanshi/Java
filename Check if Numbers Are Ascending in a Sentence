@@ -1,0 +1,17 @@
+class Solution {
+    public boolean areNumbersAscending(String s) {
+        String arr[] = s.split(" ");
+        int last=0;
+        for(String str: arr){
+            try{
+                int x = Integer.parseInt(str);
+                if(x<=last){
+                    return false;
+                } else {
+                    last = x;
+                }
+            } catch(Exception e){}
+        }
+        return true;
+    }
+}
