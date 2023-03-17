@@ -1,0 +1,42 @@
+public class Sorting {
+    public static void printArr(int arr[]){
+        for(int i=0;i< arr.length-1;i++){
+            System.out.print(arr[i]+" ");
+        }
+    }
+    public static void quickSort(int arr[],int si,int ei){
+        //base
+        if(si>=ei){
+            return;
+        }
+        int pIdx=partition(arr,si,ei);  //last element->pivot
+        quickSort(arr, si, pIdx-1);  //left
+        quickSort(arr,pIdx+1,ei);  //right
+    }
+    public static int partition(int arr[],int si,int ei){
+        int pivot=arr[ei];
+        int i=si-1;  //to make place for element smaller thn pivot
+
+        for(int j=si;j<ei;j++){
+            if(arr[j]<=pivot){
+                i++;
+                //swap
+                int temp=arr[j];
+                arr[j]=arr[i];
+                arr[i]=temp;
+            }
+        }
+        i++;
+        int temp=arr[ei];
+        arr[ei]=arr[i];
+        arr[i]=temp;
+
+        return i;
+    }
+    
+    public static void main(String[] args) {
+        int arr[]={5,2,1,7,3,6};
+        quickSort(arr,0, arr.length-1);
+        printArr(arr);
+    }
+}
