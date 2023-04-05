@@ -1,0 +1,134 @@
+public class Linked_List {
+    public static class Node{
+        int data;
+        Linked_List.Node next;
+        public Node(int data){
+            this.data=data;
+            this.next=null;
+        }
+    }
+    public static Linked_List.Node head;
+    public static Linked_List.Node tail;
+    public static int size;
+
+    public  void addFirst(int data){                                 //add on beginning of LinkedList
+        //create new node
+        Node newNode=new Node(data);
+        size++;
+        if(head==null){
+            head=tail=newNode;
+            return;
+        }
+
+        newNode.next=head;//link
+        head=newNode;
+    }
+    public void addLast(int data){                                   //add on end of LinkedList
+        Node newNode=new Node(data);
+        size++;
+        if(head==null){
+            head=tail=newNode;
+            return;
+        }
+
+        tail.next=newNode;
+        tail=newNode;
+    }
+    public void add(int idx,int data){                                //add in between of LinkedList
+        if(idx==0){
+           addFirst(data);
+           return;
+        }
+
+        Node newNode=new Node(data);
+        size++;
+        Node temp=head;
+        int i=0;
+
+        while(i<idx-1){
+            temp=temp.next;
+            i++;
+        }
+        newNode.next=temp.next;
+        temp.next=newNode;
+    }
+
+    public int removeFirst(){                                              //remove from beginning of LinkedList
+        if(size==0){
+            System.out.println("LL is empty");
+            return -1;
+        }else if(size==1){
+            int val=head.data;
+            head=tail=null;
+            return val;
+        }
+
+        int val=head.data;
+        head=head.next;
+        size--;
+        return val;
+    }
+    public int removeLast(){                                                  //remove from end of LinkedList
+
+        if(size==0){
+            System.out.println("LL is empty");
+            return -1;
+        }else if(size ==1){
+            int val=head.data;
+            head=tail=null;
+            size=0;
+            return val;
+        }
+        Node prev=head;
+        for(int i=0;i<size-2;i++){
+            prev=prev.next;
+        }
+
+        int val=head.data;
+        prev.next=null;
+        tail=prev;
+        size--;
+        return val;
+    }
+    public int itrSearch(int key){                                           //iterative search of node of linked list
+        Node temp=head;
+        int i=0;
+
+        while(temp!=null){
+            if(temp.data==key){   //key found
+                return i;
+            }
+            temp=temp.next;
+            i++;
+        }
+        return -1;
+    }
+    public void printList(){                                                //print linked list
+        Node temp=head;
+        while(temp!=null){
+            System.out.print(temp.data+" ->");
+            temp=temp.next;
+        }
+        System.out.println("null");
+    }
+    public static void main(String[] args) {
+
+        Linked_List ll=new Linked_List();
+        ll.addFirst(2);
+        ll.addFirst(1);
+        ll.addLast(3);
+        ll.addLast(4);
+        ll.add(2,7);
+        ll.printList();
+
+        System.out.println("Size of linkedList: "+ll.size);                     //size of linked list
+
+        ll.removeFirst();
+        ll.printList();
+        ll.removeLast();
+        ll.printList();
+
+        System.out.println(ll.itrSearch(3));
+        System.out.println(ll.itrSearch(1));
+    }
+}
