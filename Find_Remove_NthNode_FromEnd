@@ -1,0 +1,100 @@
+public class Linked_List {
+    public static class Node{
+        int data;
+        Linked_List.Node next;
+        public Node(int data){
+            this.data=data;
+            this.next=null;
+        }
+    }
+    public static Linked_List.Node head;
+    public static Linked_List.Node tail;
+
+    public  void addFirst(int data){
+        //create new node
+        Node newNode=new Node(data);
+        if(head==null){
+            head=tail=newNode;
+            return;
+        }
+
+        newNode.next=head;//link
+        head=newNode;
+    }
+    public void addLast(int data){
+        Node newNode=new Node(data);
+        if(head==null){
+            head=tail=newNode;
+            return;
+        }
+
+        tail.next=newNode;
+        tail=newNode;
+    }
+    public void add(int idx,int data){
+        if(idx==0){
+           addFirst(data);
+           return;
+        }
+
+        Node newNode=new Node(data);
+        Node temp=head;
+        int i=0;
+
+        while(i<idx-1){
+            temp=temp.next;
+            i++;
+        }
+        newNode.next=temp.next;
+        temp.next=newNode;
+    }
+ 
+    public void deleteNthfromEnd(int n){                         //find and remove nth node from end
+        //calculate size
+        int sz=0;
+        Node temp=head;
+        while(temp!=null){
+            temp=temp.next;
+            sz++;
+        }
+
+        if(n==sz){
+            head=head.next; //remove First
+            return;
+        }
+
+        //size-n
+        int i=1;
+        int nthFromEnd=sz-n;
+        Node prev=head;
+        while(i<nthFromEnd){
+            prev=prev.next;
+            i++;
+        }
+        prev.next=prev.next.next;
+        return;
+    }
+    public void printList(){
+        Node temp=head;
+        while(temp!=null){
+            System.out.print(temp.data+"-> ");
+            temp=temp.next;
+        }
+        System.out.println("null");
+    }
+    public static void main(String[] args) {
+
+        Linked_List ll=new Linked_List();
+   
+        ll.addFirst(2);
+        ll.addFirst(1);
+        ll.addLast(3);
+        ll.addLast(4);
+        ll.add(2,7);
+  
+
+        ll.deleteNthfromEnd(3);
+        ll.printList();
+
+    }
+}
