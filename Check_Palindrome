@@ -1,0 +1,134 @@
+public class Linked_List {
+
+    public static class Node{
+        int data;
+        Linked_List.Node next;
+        public Node(int data){
+            this.data=data;
+            this.next=null;
+        }
+    }
+    public static Linked_List.Node head;
+    public static Linked_List.Node tail;
+
+    public  void addFirst(int data){
+        //create new node
+        Node newNode=new Node(data);
+        size++;
+        if(head==null){
+            head=tail=newNode;
+            return;
+        }
+
+        newNode.next=head;//link
+        head=newNode;
+    }
+    public void addLast(int data){
+        Node newNode=new Node(data);
+        size++;
+        if(head==null){
+            head=tail=newNode;
+            return;
+        }
+
+        tail.next=newNode;
+        tail=newNode;
+    }
+    public void add(int idx,int data){
+        if(idx==0){
+           addFirst(data);
+           return;
+        }
+
+        Node newNode=new Node(data);
+        size++;
+        Node temp=head;
+        int i=0;
+
+        while(i<idx-1){
+            temp=temp.next;
+            i++;
+        }
+        newNode.next=temp.next;
+        temp.next=newNode;
+    }
+
+    public int removeFirst(){
+        if(size==0){
+            System.out.println("LL is empty");
+            return -1;
+        }else if(size==1){
+            int val=head.data;
+            head=tail=null;
+            return val;
+        }
+
+        int val=head.data;
+        head=head.next;
+        size--;
+        return val;
+    }
+   
+    public Node findMid(Node head){
+        Node slow=head;
+        Node fast=head;
+
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow;
+    }
+    public boolean checkPalindrome(){                                  //check palindrome function
+        if(head==null || head.next==null){
+            return true;
+        }
+
+        //step1-find Mid
+        Node midNode=findMid(head);
+
+        //step-2 reverse 2nd half
+        Node prev =null;
+        Node curr =midNode;
+        Node next;
+        while(curr!=null){
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+
+        Node right=prev;
+        Node left =head;
+
+        //step-3 check if equal
+        while(right!=null){
+            if(left.data!=right.data){
+                return false;
+            }
+            left=left.next;
+            right=right.next;
+        }
+        return true;
+    }
+    public void printList(){
+        Node temp=head;
+        while(temp!=null){
+            System.out.print(temp.data+"-> ");
+            temp=temp.next;
+        }
+        System.out.println("null");
+    }
+    public static void main(String[] args) {
+
+        Linked_List ll=new Linked_List();
+        ll.addFirst(1);
+        ll.addFirst(2);
+        ll.addFirst(2);
+        ll.addFirst(1);
+   
+        ll.printList();
+        
+        System.out.println(ll.checkPalindrome());
+    }
+}
