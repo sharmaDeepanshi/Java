@@ -1,0 +1,39 @@
+public class Linked_List {
+    public static class Node{
+        int data;
+        Linked_List.Node next;
+        public Node(int data){
+            this.data=data;
+            this.next=null;
+        }
+    }
+    public static Linked_List.Node head;
+    public static Linked_List.Node tail;
+    public static int size;
+  
+     public static boolean isCycle(){                             //detect cycle function
+        Node slow=head;
+        Node fast=head;
+
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast){
+                return true;  //cycle exists
+            }
+        }
+        return false; // cycle does't exists
+     }
+  
+    public static void main(String[] args) {
+
+        head=new Node(1);
+        Node temp=new Node(2);
+        head.next=temp;
+        head.next.next=new Node(3);
+        head.next.next.next=temp;
+
+        System.out.println(isCycle());
+     
+    }
+}
