@@ -1,0 +1,54 @@
+import java.io.*;
+import java.util.Scanner;
+
+public class Demofile1 {
+
+	public static void main(String[] args) throws IOException{
+	  	String ch;
+	  	int data;
+	  	FileInputStream fin=null;
+	  	FileOutputStream fout=null;
+        Scanner sc=new Scanner(System.in);
+        try {
+        	fout=new FileOutputStream("abc.txt");
+        	ch=sc.nextLine();
+        	for(int j=0;j<ch.length();j++) {
+        		fout.write(ch.charAt(j));
+        	}
+        }
+        catch(IOException e)
+        {
+            System.out.println("\n IO Exception e"+e);	
+        }
+        finally {
+        	try {
+        		if(fout!=null)
+        			fout.close();
+        	}
+        	catch(IOException o)
+        	{
+        		System.out.println(o);
+        	}
+        }
+        
+        try {
+        	fin=new FileInputStream("abc.txt");
+        	while((data=fin.read())!=-1)
+        		System.out.print((char)data);
+        }
+        catch(IOException e)
+        {
+        	System.out.println("\n I/O Exception"+e);
+        }
+        finally {
+        	try {
+        		if(fin!=null)
+        			fin.close();
+        	}
+        	catch(IOException o) {
+        		System.out.println(o);
+        	}
+        }
+	}
+
+}
