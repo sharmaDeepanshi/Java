@@ -1,0 +1,52 @@
+import java.io.*;
+import java.util.Scanner;
+
+public class Demofile2 {
+
+	public static void main(String[] args) {
+		String ch;
+		int data;
+		FileReader fin=null;
+		FileWriter fout=null;
+		Scanner sc=new Scanner(System.in);
+		try {
+			fout=new FileWriter("abc2.txt");
+			ch=sc.nextLine();
+			for(int j=0;j<ch.length();j++) 
+				fout.write(ch.charAt(j));
+			
+	     	}catch(IOException e) {
+				System.out.println("\n IO Exception"+e);
+			}
+			finally {
+				try {
+					if(fout!=null)
+						fout.close();
+				}
+				catch(IOException o) {
+					System.out.println(o);
+				}
+			}
+			
+			try {
+				fin=new FileReader("abc2.txt");
+				while((data=fin.read())!=-1)
+					System.out.print((char)data);
+			}
+			catch(IOException e) {
+				System.out.println("\n I/O Exception"+e);
+			}
+			finally {
+				try {
+					if(fin!=null)
+						fin.close();
+				}
+				catch(IOException o) {
+					System.out.println(o);
+				}
+			}
+		}
+
+	}
+
+
